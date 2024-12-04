@@ -1,0 +1,17 @@
+sudo chmod 777 /dev/ttyUSB0
+
+site para testar o esp32: wokwi.com
+da pra jogar o bin e ele testa
+
+// Transportar a variavel de ambiente pro idf.py
+. $HOME/esp/esp-idf/export.sh
+
+// Buildar o codigo
+idf.py build
+
+// Transportar o codigo para o esp32
+idf.py flash
+
+// Ver a saida do esp32
+idf.py monitor
+
