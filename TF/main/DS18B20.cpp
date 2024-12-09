@@ -36,6 +36,8 @@ void DS18B20::scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int * ar
 			{
 				uint8_t bit = (bits >> bitsPos) & 1;
 				onewire->escreve_bit(bit);
+				uint8_t reqRead      = onewire->readBit();
+				reqRead = onewire->readBit();
 			}
 		}
 	}
@@ -46,20 +48,23 @@ void DS18B20::scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int * ar
 	if(normal==0 && complemento==0)
 	{
 		bits = bits << 1;
+		onewire->escreve_bit(0);
 		scanAddresses(bits,bitsPos,arr,arrPos,0);
 		bits = bits | 1;
-		*arrPos = arrPos+1;
+		*arrPos = *arrPos+1;
 		scanAddresses(bits,bitsPos,arr,arrPos,1);
 	}
 	else if(normal==0 && complemento==1)
 	{
 		bits = bits << 1;
+		onewire->escreve_bit(0);
 		scanAddresses(bits,bitsPos,arr,arrPos,0);
 	}
 	else if(normal==1 && complemento==0)
 	{
 		bits = bits << 1 | 1;
-		scanAddresses(bits,bitsPos,darr,arrPos,0);
+		onewire->escreve_bit(1);
+		scanAddresses(bits,bitsPos,arr,arrPos,0);
 	}
 	else
 	{

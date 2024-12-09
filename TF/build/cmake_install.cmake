@@ -1,8 +1,8 @@
-# Install script for directory: /home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/T2-dist/TF
+# Install script for directory: C:/Users/rlvvmc/source/repos/T2-dist/TF
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/TF")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,9 +32,14 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "C:/Users/rlvvmc/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32-elf-objdump.exe")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/T2-dist/TF/build/esp-idf/cmake_install.cmake")
+  include("C:/Users/rlvvmc/source/repos/T2-dist/TF/build/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -45,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/T2-dist/TF/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/rlvvmc/source/repos/T2-dist/TF/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
