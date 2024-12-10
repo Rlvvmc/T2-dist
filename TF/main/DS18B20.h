@@ -1,4 +1,9 @@
 #include <inttypes.h> 
+#include <iostream>
+#include <bitset>
+#include <cassert>
+#include <cstddef>
+#include <iostream>
 #include "onewire.h"
 
 #include "digital.h"
@@ -20,7 +25,7 @@ public:
 	void init (void);
 	void init2 (void);
 	void fazScan(void);
-	void scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int * arrPos, int Opp);
+	void scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64>* arr, int* arrPos, int Opp);
 
 
 

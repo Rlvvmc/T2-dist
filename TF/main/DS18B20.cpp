@@ -23,9 +23,9 @@ void DS18B20::capturaBit (int posicao,char v[], int valor)
 	else v[pbyte] &= ~(1<< pbit);
 }
 
-void DS18B20::scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64> * arr, int arrPos, int Opp)
+void DS18B20::scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64>* arr, int* arrPos, int Opp)
 {
-	uint8_t normal, complemento;
+	uint8_t normal = 0, complemento = 0;
 	if(Opp == 1)
 	{ 
 		onewire->reset();
@@ -48,29 +48,30 @@ void DS18B20::scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64> *
 	
 	if(bitsPos == 65)
 	{
-		arr[arrPos] = bits;
+		arr[*arrPos] = bits;
 		return;
 	}
 	else if(normal==0 && complemento==0)
 	{
-		bits.set(position_t(bitsPos), false);
+		bits.set(bitsPos, false);
 		printf("b(%d)=%d \n",bitsPos,0);
 		onewire->escreve_bit(0);
 		scanAddresses(bits,bitsPos+1,arr,arrPos,0);
-		bits.set(position_t(bitsPos), true);
+		bits.set(bitsPos, true);
 		printf("b(%d)=%d \n",bitsPos,1);
-		scanAddresses(bits,bitsPos+1,arr,arrPos+1,1);
+		*arrPos=*arrPos+1;
+		scanAddresses(bits,bitsPos+1,arr,arrPos,1);
 	}
 	else if(normal==0 && complemento==1)
 	{
-		bits.set(position_t(bitsPos), false);
+		bits.set(bitsPos, false);
 		printf("b(%d)=%d \n",bitsPos,0);
 		onewire->escreve_bit(0);
 		scanAddresses(bits,bitsPos+1,arr,arrPos,0);
 	}
 	else if(normal==1 && complemento==0)
 	{
-		bits.set(position_t(bitsPos), true);
+		bits.set(bitsPos, true);
 		printf("b(%d)=%d \n",bitsPos,0);
 		onewire->escreve_bit(1);
 		scanAddresses(bits,bitsPos+1,arr,arrPos,0);
