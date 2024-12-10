@@ -38,6 +38,8 @@ void DS18B20::scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64>* 
 				complemento = onewire->readBit();
 				onewire->escreve_bit(bits[i]);
 			}
+			normal      = onewire->readBit();
+			complemento = onewire->readBit();
 		}
 	}
 	else
