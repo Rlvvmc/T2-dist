@@ -23,65 +23,71 @@ void DS18B20::capturaBit (int posicao,char v[], int valor)
 	else v[pbyte] &= ~(1<< pbit);
 }
 
-void DS18B20::scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int arrPos, int Opp)
+void DS18B20::scanAddresses(std::vector<std::vector<bool>> addrArrays, std::vector<bool> divArr)
 {
-	uint8_t normal, complemento;
-	if(Opp == 1)
-	{ 
-		onewire->reset();
-		onewire->writeByte(SEARCH_ROM);
-		if(bits != 0)
+	uint8_t normal = 0, complemento = 0;
+	std::vector<bool> bitsTemp, divTemp;
+	int divPoint=0;
+	bool divFlag=false;
+	onewire->reset();
+	onewire->writeByte(SEARCH_ROM);
+	if(divArr.size() != 0)
+	{
+		printf("divergence \n");
+		divPoint = divArr.size()-1;
+		divFlag=true;
+		for(int i=divPoint;i>0;i--)
 		{
-			for(int i = bitsPos; i > 0; i--)
-			{
-				uint8_t bit = (bits >> bitsPos) & 1;
-				normal      = onewire->readBit();
-				complemento = onewire->readBit();
-				onewire->escreve_bit(bit);
-			}
+			normal 		= onewire->readBit();
+			complemento = onewire->readBit();
+			bitsTemp.push_back(divArr.at(i));
+			onewire->escreve_bit(divArr.at(i));
 		}
 	}
-	normal      = onewire->readBit();
-	complemento = onewire->readBit();
-	bitsPos++;
-	if(bits == 0)
+	for(int i=divPoint;i<64;i++)
 	{
-		bitsPos--;
+		normal 		= onewire->readBit();
+		complemento = onewire->readBit();
+		if(normal == 0 && complemento == 0)
+		{
+			if(divFlag)
+			{
+				bitsTemp.push_back(1);
+				onewire->escreve_bit(1);
+				printf("val(%d) = %d \n",i,1);
+			}
+			else
+			{
+				bitsTemp.push_back(0);
+				onewire->escreve_bit(0);
+				printf("val(%d) = %d \n",i,0);
+				divTemp = bitsTemp;
+			}
+		}
+		if(normal == 0 && complemento == 1)
+		{
+			onewire->escreve_bit(0);
+			bitsTemp.push_back(0);
+			printf("val(%d) = %d \n",i,0);
+		}
+		if(normal == 1 && complemento == 0)
+		{
+			onewire->escreve_bit(1);
+			bitsTemp.push_back(1);
+			printf("val(%d) = %d \n",i,1);
+		}
+		if(normal == 1 && complemento == 1)
+		{
+			break;
+		}
 	}
-	if(bitsPos == 65)
+	addrArrays.push_back(bitsTemp);
+	 for (int i = 0; i < bitsTemp.size(); i++) {
+        std::cout << bitsTemp.at(i) << ' ';
+    }
+	if(divTemp.size() != 0)
 	{
-		printf("%lld\n",bits);
-		return;
-	}
-	else if(normal==0 && complemento==0)
-	{
-		bits = bits << 1;
-		printf("val(%d) = %d 00\n",bitsPos,0);
-		onewire->escreve_bit(0);
-		scanAddresses(bits,bitsPos,arr,arrPos,0);
-		bits = bits | 1;
-		arrPos = arrPos+1;
-		printf("val(%d) = %d 00\n",bitsPos,1);
-		scanAddresses(bits,bitsPos,arr,arrPos,1);
-	}
-	else if(normal==0 && complemento==1)
-	{
-		bits = bits << 1;
-		printf("val(%d) = %d 01\n",bitsPos,0);
-		onewire->escreve_bit(0);
-		scanAddresses(bits,bitsPos,arr,arrPos,0);
-	}
-	else if(normal==1 && complemento==0)
-	{
-		bits = bits << 1 | 1;
-		printf("val(%d) = %d 10\n",bitsPos,1);
-		onewire->escreve_bit(1);
-		scanAddresses(bits,bitsPos,arr,arrPos,0);
-	}
-	else
-	{
-		printf("returned\n");
-		return;
+		scanAddresses(addrArrays,divTemp);
 	}
 }
 

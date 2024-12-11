@@ -3,19 +3,28 @@
 #include <bitset>
 #include <iostream>
 
-#define NUMERO_SENSORES 2
+#define NUMERO_SENSORES 10
 
 extern "C" void app_main();
 
+unsigned int bintohex(char *digits){
+  unsigned int res=0;
+  while(*digits)
+    res = (res<<1)|(*digits++ -'0');
+  return res;
+}
 
 void app_main(void)
 {
-    uint64_t addrList[NUMERO_SENSORES] = {0,0};
-    int addrPos = 0;
+    std::vector<std::vector<bool>> addrArrays;
+    std::vector<bool> dummy;
     DS18B20 meuSensor = DS18B20(GPIO_NUM_4);
-    meuSensor.scanAddresses(0,0,addrList,0,1);
-    for(int i=0;i<NUMERO_SENSORES;i++)
-    {
-      printf("%lld", addrList[i]);
+    meuSensor.scanAddresses(addrArrays,dummy);
+     for (int i = 0; i < addrArrays.size(); i++) {
+        for(int j=0; j <addrArrays.at(i).size();j++)
+        {
+          std::cout << addrArrays.at(i).at(j) << ' ';
+        }
+        printf("\n");
     }
 }
