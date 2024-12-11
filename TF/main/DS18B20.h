@@ -1,4 +1,9 @@
 #include <inttypes.h> 
+#include <iostream>
+#include <bitset>
+#include <cassert>
+#include <cstddef>
+#include <iostream>
 #include "onewire.h"
 
 #include "digital.h"
@@ -11,7 +16,6 @@ private:
 	ONEWIRE *onewire;
 	char CRC (char end[]);
 	void capturaBit (int posicao, char v[], int valor);
-	void scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int * arrPos, int Opp);
 public:
 	DS18B20 (gpio_num_t pino);
 	float readTemp (void);
@@ -21,6 +25,7 @@ public:
 	void init (void);
 	void init2 (void);
 	void fazScan(void);
+	void scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64>* arr, int* arrPos, int Opp);
 
 
 
