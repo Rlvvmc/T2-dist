@@ -1,4 +1,4 @@
-/* * Data converted from /home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/T2-dist/TF/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

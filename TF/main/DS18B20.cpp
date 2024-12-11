@@ -23,66 +23,49 @@ void DS18B20::capturaBit (int posicao,char v[], int valor)
 	else v[pbyte] &= ~(1<< pbit);
 }
 
-void DS18B20::scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int arrPos, int Opp)
+void DS18B20::scanAddresses(uint64_t bits, int arrPos, std::vector<uint64_t> &bitsVector, int numSens)
 {
-	uint8_t normal, complemento;
-	if(Opp == 1)
-	{ 
-		onewire->reset();
-		onewire->writeByte(SEARCH_ROM);
-		if(bits != 0)
+	onewire->reset();
+	onewire->writeByte(SEARCH_ROM);
+
+	for(int bitPos = 0; bitPos < 64; bitPos++)
+	{
+		uint8_t normal = onewire->readBit();
+		uint8_t complemento = onewire->readBit();
+
+		if (normal == 0 && complemento == 0) 
 		{
-			for(int i = bitsPos; i > 0; i--)
-			{
-				uint8_t bit = (bits >> bitsPos) & 1;
-				normal      = onewire->readBit();
-				complemento = onewire->readBit();
-				onewire->escreve_bit(bit);
-			}
-		}
-	}
-	normal      = onewire->readBit();
-	complemento = onewire->readBit();
-	bitsPos++;
-	if(bits == 0)
-	{
-		bitsPos--;
-	}
-	if(bitsPos == 65)
-	{
-		printf("%lld\n",bits);
-		return;
-	}
-	else if(normal==0 && complemento==0)
-	{
-		bits = bits << 1;
-		printf("val(%d) = %d 00\n",bitsPos,0);
-		onewire->escreve_bit(0);
-		scanAddresses(bits,bitsPos,arr,arrPos,0);
-		bits = bits | 1;
-		arrPos = arrPos+1;
-		printf("val(%d) = %d 00\n",bitsPos,1);
-		scanAddresses(bits,bitsPos,arr,arrPos,1);
-	}
-	else if(normal==0 && complemento==1)
-	{
-		bits = bits << 1;
-		printf("val(%d) = %d 01\n",bitsPos,0);
-		onewire->escreve_bit(0);
-		scanAddresses(bits,bitsPos,arr,arrPos,0);
-	}
-	else if(normal==1 && complemento==0)
-	{
-		bits = bits << 1 | 1;
-		printf("val(%d) = %d 10\n",bitsPos,1);
-		onewire->escreve_bit(1);
-		scanAddresses(bits,bitsPos,arr,arrPos,0);
-	}
-	else
-	{
-		printf("returned\n");
-		return;
-	}
+            // Ambos os bits são 0, bifurcação
+
+            bits = (bits << 1);
+            onewire->escreve_bit(numSens);
+			printf("Valor(%d) = 0 \n", bitPos);
+			bits = bits | 1;
+
+        } 
+		else if (normal == 0 && complemento == 1) 
+		{
+            // Bit confirmado como 0
+            bits = (bits << 1);      // Adiciona um 0
+            onewire->escreve_bit(0); // Escreve 0 no barramento
+			printf("Valor(%d) = 0 \n", bitPos);
+        } 
+		else if (normal == 1 && complemento == 0) 
+		{
+            // Bit confirmado como 1
+            bits = (bits << 1) | 1;  // Adiciona um 1
+            onewire->escreve_bit(1); // Escreve 1 no barramento
+			printf("Valor(%d) = 1 \n", bitPos);
+        } 
+		else 
+		{
+            // Caso inválido ou erro de comunicação
+            printf("Erro: normal=%d complemento=%d\n", normal, complemento);
+            break;
+        }
+    }
+	
+	bitsVector.push_back(bits);
 }
 
 void DS18B20::fazScan (void)

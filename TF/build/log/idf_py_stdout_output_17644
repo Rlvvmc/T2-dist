@@ -1,0 +1,121 @@
+���x�ɍ��ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7176
+load:0x40078000,len:15564
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3904
+entry 0x40080640
+[0;32mI (31) boot: ESP-IDF v5.3 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time Dec 11 2024 15:56:04[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v3.1[0m
+[0;32mI (39) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (44) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (53) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (62) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (69) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (84) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (96) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=09bfch ( 39932) map[0m
+[0;32mI (118) esp_image: segment 1: paddr=00019c24 vaddr=3ffb0000 size=02354h (  9044) load[0m
+[0;32mI (121) esp_image: segment 2: paddr=0001bf80 vaddr=40080000 size=04098h ( 16536) load[0m
+[0;32mI (130) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=148f4h ( 84212) map[0m
+[0;32mI (161) esp_image: segment 4: paddr=0003491c vaddr=40084098 size=08988h ( 35208) load[0m
+[0;32mI (181) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (182) boot: Disabling RNG early entropy source...[0m
+[0;32mI (193) cpu_start: Multicore app[0m
+[0;32mI (202) cpu_start: Pro cpu start user code[0m
+[0;32mI (202) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (202) app_init: Application information:[0m
+[0;32mI (205) app_init: Project name:     TF[0m
+[0;32mI (209) app_init: App version:      04e9bd3-dirty[0m
+[0;32mI (215) app_init: Compile time:     Dec 11 2024 15:55:33[0m
+[0;32mI (221) app_init: ELF file SHA256:  f6f163277...[0m
+[0;32mI (226) app_init: ESP-IDF:          v5.3[0m
+[0;32mI (230) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (235) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (240) efuse_init: Chip rev:         v3.1[0m
+[0;32mI (245) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (252) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (258) heap_init: At 3FFB2C28 len 0002D3D8 (180 KiB): DRAM[0m
+[0;32mI (264) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (271) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (277) heap_init: At 4008CA20 len 000135E0 (77 KiB): IRAM[0m
+[0;32mI (285) spi_flash: detected chip: generic[0m
+[0;32mI (288) spi_flash: flash io: dio[0m
+[0;33mW (292) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (306) main_task: Started on CPU0[0m
+[0;32mI (316) main_task: Calling app_main()[0m
+BitPos: 0, Bits: 0
+BitPos: 1, Bits: 0
+BitPos: 2, Bits: 0
+BitPos: 3, Bits: 1
+BitPos: 4, Bits: 2
+BitPos: 5, Bits: 5
+BitPos: 6, Bits: a
+BitPos: 7, Bits: 14
+BitPos: 8, Bits: 29
+BitPos: 9, Bits: 52
+BitPos: 10, Bits: a5
+BitPos: 11, Bits: 14b
+BitPos: 12, Bits: 296
+BitPos: 13, Bits: 52c
+BitPos: 14, Bits: a58
+BitPos: 15, Bits: 14b0
+BitPos: 16, Bits: 2960
+BitPos: 17, Bits: 52c1
+BitPos: 18, Bits: a582
+BitPos: 19, Bits: 14b04
+BitPos: 20, Bits: 29609
+BitPos: 21, Bits: 52c12
+BitPos: 22, Bits: a5824
+BitPos: 23, Bits: 14b048
+BitPos: 24, Bits: 296091
+BitPos: 25, Bits: 52c123
+BitPos: 26, Bits: a58246
+BitPos: 27, Bits: 14b048c
+BitPos: 28, Bits: 2960918
+BitPos: 29, Bits: 52c1231
+BitPos: 30, Bits: a582463
+BitPos: 31, Bits: 14b048c6
+BitPos: 32, Bits: 2960918c
+BitPos: 33, Bits: 52c12318
+BitPos: 34, Bits: a5824630
+BitPos: 35, Bits: 14b048c60
+BitPos: 36, Bits: 2960918c0
+BitPos: 37, Bits: 52c123180
+BitPos: 38, Bits: a58246300
+BitPos: 39, Bits: 14b048c600
+BitPos: 40, Bits: 2960918c00
+BitPos: 41, Bits: 52c1231800
+BitPos: 42, Bits: a582463000
+BitPos: 43, Bits: 14b048c6000
+BitPos: 44, Bits: 2960918c000
+BitPos: 45, Bits: 52c12318000
+BitPos: 46, Bits: a5824630000
+BitPos: 47, Bits: 14b048c60000
+BitPos: 48, Bits: 2960918c0000
+BitPos: 49, Bits: 52c123180000
+BitPos: 50, Bits: a58246300000
+BitPos: 51, Bits: 14b048c600000
+BitPos: 52, Bits: 2960918c00000
+BitPos: 53, Bits: 52c1231800000
+BitPos: 54, Bits: a582463000000
+BitPos: 55, Bits: 14b048c6000000
+BitPos: 56, Bits: 2960918c000001
+BitPos: 57, Bits: 52c12318000003
+BitPos: 58, Bits: a5824630000007
+BitPos: 59, Bits: 14b048c6000000f
+BitPos: 60, Bits: 2960918c000001e
+BitPos: 61, Bits: 52c12318000003d
+BitPos: 62, Bits: a5824630000007b
+BitPos: 63, Bits: 14b048c6000000f6
+[0;32mI (466) main_task: Returned from app_main()[0m

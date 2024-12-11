@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/CMakeFiles/bootloader
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/CMakeFiles/bootloader.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/CMakeFiles/bootloader-complete.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-C:/Users/rlvvmc/source/repos/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/CMakeFiles/bootloader
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/CMakeFiles/bootloader.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/CMakeFiles/bootloader-complete.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/igor/Área de Trabalho/UFSC/Sistemas digitais embarcados/main/T2-dist/TF/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
