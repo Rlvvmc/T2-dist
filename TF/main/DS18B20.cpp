@@ -23,63 +23,64 @@ void DS18B20::capturaBit (int posicao,char v[], int valor)
 	else v[pbyte] &= ~(1<< pbit);
 }
 
-void DS18B20::scanAddresses(std::bitset<64> bits, int bitsPos, std::bitset<64>* arr, int* arrPos, int Opp)
+void DS18B20::scanAddresses(uint64_t bits, int bitsPos, uint64_t * arr, int arrPos, int Opp)
 {
-	uint8_t normal = 0, complemento = 0;
+	uint8_t normal, complemento;
 	if(Opp == 1)
 	{ 
 		onewire->reset();
 		onewire->writeByte(SEARCH_ROM);
-		if(bits != 0x0000000000000000)
+		if(bits != 0)
 		{
 			for(int i = bitsPos; i > 0; i--)
 			{
+				uint8_t bit = (bits >> bitsPos) & 1;
 				normal      = onewire->readBit();
 				complemento = onewire->readBit();
-				onewire->escreve_bit(bits[i]);
+				onewire->escreve_bit(bit);
 			}
-			normal      = onewire->readBit();
-			complemento = onewire->readBit();
 		}
 	}
-	else
+	normal      = onewire->readBit();
+	complemento = onewire->readBit();
+	bitsPos++;
+	if(bits == 0)
 	{
-		normal      = onewire->readBit();
-		complemento = onewire->readBit();
+		bitsPos--;
 	}
-	
 	if(bitsPos == 65)
 	{
-		arr[*arrPos] = bits;
+		printf("%lld\n",bits);
 		return;
 	}
 	else if(normal==0 && complemento==0)
 	{
-		bits.set(bitsPos, false);
-		printf("b(%d)=%d \n",bitsPos,0);
+		bits = bits << 1;
+		printf("val(%d) = %d 00\n",bitsPos,0);
 		onewire->escreve_bit(0);
-		scanAddresses(bits,bitsPos+1,arr,arrPos,0);
-		bits.set(bitsPos, true);
-		printf("b(%d)=%d \n",bitsPos,1);
-		*arrPos=*arrPos+1;
-		scanAddresses(bits,bitsPos+1,arr,arrPos,1);
+		scanAddresses(bits,bitsPos,arr,arrPos,0);
+		bits = bits | 1;
+		arrPos = arrPos+1;
+		printf("val(%d) = %d 00\n",bitsPos,1);
+		scanAddresses(bits,bitsPos,arr,arrPos,1);
 	}
 	else if(normal==0 && complemento==1)
 	{
-		bits.set(bitsPos, false);
-		printf("b(%d)=%d \n",bitsPos,0);
+		bits = bits << 1;
+		printf("val(%d) = %d 01\n",bitsPos,0);
 		onewire->escreve_bit(0);
-		scanAddresses(bits,bitsPos+1,arr,arrPos,0);
+		scanAddresses(bits,bitsPos,arr,arrPos,0);
 	}
 	else if(normal==1 && complemento==0)
 	{
-		bits.set(bitsPos, true);
-		printf("b(%d)=%d \n",bitsPos,0);
+		bits = bits << 1 | 1;
+		printf("val(%d) = %d 10\n",bitsPos,1);
 		onewire->escreve_bit(1);
-		scanAddresses(bits,bitsPos+1,arr,arrPos,0);
+		scanAddresses(bits,bitsPos,arr,arrPos,0);
 	}
 	else
 	{
+		printf("returned\n");
 		return;
 	}
 }
